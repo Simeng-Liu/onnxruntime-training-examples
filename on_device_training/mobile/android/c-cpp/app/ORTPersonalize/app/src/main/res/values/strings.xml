@@ -2,6 +2,7 @@
     <string name="app_name">ORT Personalize</string>
     <string name="inference">Inference</string>
     <string name="training">Training</string>
+    <string name="distribute">distribute</string>
     <string name="a">A</string>
     <string name="b">B</string>
     <string name="x">X</string>

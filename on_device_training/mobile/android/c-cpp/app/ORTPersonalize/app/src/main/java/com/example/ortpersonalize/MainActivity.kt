@@ -65,6 +65,9 @@ class MainActivity : AppCompatActivity() {
         trainButton.setOnClickListener(onTrainButtonClickedListener)
         trainButton.isEnabled = false
 
+        val distButton: Button = findViewById(R.id.dist_button)
+        distButton.setOnClickListener(onDistributeButtonClickedListener)
+
         val classA: Button = findViewById(R.id.classA)
         classA.setOnClickListener(onClassAClickedListener)
         classA.setOnLongClickListener(onClassALongClickedListener)
@@ -124,6 +127,13 @@ class MainActivity : AppCompatActivity() {
         }
         binding.trainButton.isEnabled = false
         binding.inferButton.isEnabled = true
+    }
+
+    private val onDistributeButtonClickedListener: View.OnClickListener = object : View.OnClickListener {
+        override fun onClick(p0: View?) {
+            Toast.makeText(this@MainActivity, "Trying to connect to server", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     private val onTrainButtonClickedListener: View.OnClickListener = object : View.OnClickListener {

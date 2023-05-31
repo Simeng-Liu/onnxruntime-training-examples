@@ -41,6 +41,14 @@
                 android:layout_weight="1"
                 android:text="@string/inference"
                 android:textAllCaps="false" />
+            <Button
+                android:id="@+id/dist_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/distribute"
+                android:textAllCaps="false" />
 
         </LinearLayout>
 
@@ -53,7 +61,7 @@
             <ImageView
                 android:id="@+id/input_image"
                 android:layout_width="0dp"
-                android:layout_height="400dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="@string/input_image_for_inference_scenarios"
                 tools:srcCompat="@tools:sample/avatars" />

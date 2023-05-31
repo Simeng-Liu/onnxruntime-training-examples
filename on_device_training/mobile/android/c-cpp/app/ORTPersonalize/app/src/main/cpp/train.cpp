@@ -3,6 +3,8 @@
 //
 
 #include "train.h"
+#include <iostream>
+#include <android/log.h>
 
 
 namespace training {
@@ -15,6 +17,7 @@ namespace training {
 
         Ort::MemoryInfo memory_info = Ort::MemoryInfo::CreateCpu(OrtArenaAllocator, OrtMemTypeDefault);
         std::vector<Ort::Value> user_inputs; // {inputs, labels}
+        const char *Train_tag = "Train_Model_TAG";
         // inputs batched
         user_inputs.emplace_back(Ort::Value::CreateTensor(memory_info, batches,
                                                           batch_size * image_channels * image_rows * image_cols * sizeof(float),
@@ -28,7 +31,12 @@ namespace training {
                                                           ONNX_TENSOR_ELEMENT_DATA_TYPE_INT32));
 
         // run the train step and execute the forward + loss + backward.
-        float loss = *(session_cache->training_session.TrainStep(user_inputs).front().GetTensorMutableData<float>());
+//        float loss = *(session_cache->training_session.TrainStep(user_inputs).front().GetTensorMutableData<float>());
+        std::vector<Ort::Value> inter_vector = session_cache->training_session.TrainStep(user_inputs);
+        __android_log_print(ANDROID_LOG_DEBUG, Train_tag, "The lenght of inter_vector is  %d", inter_vector.size());
+        float loss = *inter_vector.front().GetTensorMutableData<float>();
+        std::cout << "The loss is " << loss << std::endl;
+        __android_log_print(ANDROID_LOG_DEBUG, Train_tag, "The loss in log is  %.5f", loss);
 
         // update the model parameters by taking a step in the direction of the gradients computed above.
         session_cache->training_session.OptimizerStep();
